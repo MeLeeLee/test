@@ -18,13 +18,10 @@ public class Filter1 implements Filter{
 	}
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		System.out.println("filter ing ...");
 		ServletContext servletContext=this.config.getServletContext();
 		String id=this.config.getInitParameter("id");
 		Enumeration<String> enumeration=this.config.getInitParameterNames();
-		System.out.println(id);
-		System.out.println(servletContext.getInitParameter("name"));
-		//·ÅÐÐ
+		System.out.println("filter...id="+id+"  name="+servletContext.getInitParameter("name"));
 		chain.doFilter(request, response);
 	}
 	public void init(FilterConfig filterConfig) throws ServletException {
