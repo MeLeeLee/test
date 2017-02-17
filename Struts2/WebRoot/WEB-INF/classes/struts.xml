@@ -2,12 +2,11 @@
 <!DOCTYPE struts PUBLIC
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
- 
 <struts>
-    <package name="Struts2" namespace="/Struts2" extends="struts-default">
+    <package name="Struts2" namespace="/test" extends="struts-default">
         <action name="testServlet" class="com.mengll.action.loginAction">
-            <result name="success">/error.jsp</result>
-            <result name="false">/error.jsp</result>
+            <result name="success">/primer/success.jsp</result>
+            <result name="false">/test/error.jsp</result>
         </action>	
     </package>
 </struts>

@@ -10,6 +10,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class Filter1 implements Filter{
 	FilterConfig config;
@@ -22,7 +24,16 @@ public class Filter1 implements Filter{
 		String id=this.config.getInitParameter("id");
 		Enumeration<String> enumeration=this.config.getInitParameterNames();
 		System.out.println("filter...id="+id+"  name="+servletContext.getInitParameter("name"));
-		chain.doFilter(request, response);
+		
+		HttpServletRequest httpServletRequest=(HttpServletRequest) request;
+		HttpServletResponse httpServletResponse=(HttpServletResponse) response;
+		String path=httpServletRequest.getServletPath();
+		System.out.println(path);
+		if (path.equals("/index.jsp")) {
+			chain.doFilter(request, response);
+		}else {
+			httpServletRequest.getRequestDispatcher("/primer/success.jsp").forward(httpServletRequest, httpServletResponse);
+		}
 	}
 	public void init(FilterConfig filterConfig) throws ServletException {
 		this.config=filterConfig;
