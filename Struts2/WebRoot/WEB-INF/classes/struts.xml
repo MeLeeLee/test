@@ -3,10 +3,14 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-    <package name="Struts2" namespace="/test" extends="struts-default">
-        <action name="testServlet" class="com.mengll.action.loginAction">
-            <result name="success">/primer/success.jsp</result>
-            <result name="false">/test/error.jsp</result>
-        </action>	
-    </package>
+	<package name="Struts2" namespace="/test" extends="struts-default">
+		<global-results>
+			<result name="success">/global/success.jsp</result>
+		</global-results>
+		<action name="*_Action" class="com.mengll.action.loginAction" method="{1}">
+
+			<!-- 默认为转发 写法一 -->
+			<result name="false">/test/error.jsp</result>
+		</action>
+	</package>
 </struts>
