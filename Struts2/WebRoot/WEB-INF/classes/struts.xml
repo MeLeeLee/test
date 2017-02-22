@@ -3,14 +3,40 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
+	<!-- 国际化文件是否加载，以及Struts.xm文件是否重新加载 -->
+	<!-- <constant name="struts.i18n.reload" value="true"></constant>
+	<constant name="struts.configuration.xml.reload" value="true"></constant> -->
+	<!-- devMod可以代替上面俩 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- 静态方法调用开关，
+	用于<a href="/chapter3Action!result1">result1</a>这种链接是要把下面开关打开 ,不推荐用此，建议使用通配符-->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false"></constant>
+	<!-- 配置资源文件，多个时用，隔开，且不带后缀名 -->
+	<constant name="struts.custom.i18n.resources" 
+			value="com.mengll.action.resources">
+	</constant>
+	<!-- 设置上传文件大小限制 200m-->
+	<constant name="struts.multipart.maxSize" value="200000000"></constant>
 	<package name="Struts2" namespace="/test" extends="struts-default">
 		<global-results>
 			<result name="success">/global/success.jsp</result>
 		</global-results>
-		<action name="*_Action" class="com.mengll.action.loginAction" method="{1}">
-
+		<action name="loginAction" class="com.mengll.action.loginAction" method="login">
 			<!-- 默认为转发 写法一 -->
 			<result name="false">/test/error.jsp</result>
+			<!-- 下面是重定向 -->
+			<!-- <result name="input" type="redirection"></result> -->
+			<result name="input">/global/error.jsp</result>
+		</action>
+		<action name="uploadAction" class="com.mengll.action.UploadAction" method="upload">
+			<!-- 配置默认拦截器栈中某个拦截器的参数 -->
+			<interceptor-ref name="defaultStack">
+				<param name="fileUpload.maximunStack">123123</param>
+				<param name="fileUpload.allowedType">text/plain</param>
+				<param name="fileUpload.allowedExtensions">.txt</param>
+			</interceptor-ref>
+			<result name="success">/global/success.jsp</result>
+			<result name="input">/global/error.jsp</result>
 		</action>
 	</package>
 </struts>
