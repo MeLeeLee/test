@@ -17,7 +17,17 @@
 	</constant>
 	<!-- 设置上传文件大小限制 200m-->
 	<constant name="struts.multipart.maxSize" value="200000000"></constant>
+	
 	<package name="Struts2" namespace="/test" extends="struts-default">
+	
+		<interceptors>
+			<interceptor-stack name="myInterceptorStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="myInterceptor"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor name="myInterceptor" class="com.mengll.interceptor.MyInterceptor"></interceptor>
+		</interceptors>
+		<default-interceptor-ref name="myInterceptorStack"></default-interceptor-ref>
 		<global-results>
 			<result name="success">/global/success.jsp</result>
 		</global-results>
@@ -30,11 +40,11 @@
 		</action>
 		<action name="uploadAction" class="com.mengll.action.UploadAction" method="upload">
 			<!-- 配置默认拦截器栈中某个拦截器的参数 -->
-			<interceptor-ref name="defaultStack">
+			<!-- <interceptor-ref name="defaultStack">
 				<param name="fileUpload.maximunStack">123123</param>
 				<param name="fileUpload.allowedType">text/plain</param>
 				<param name="fileUpload.allowedExtensions">.txt</param>
-			</interceptor-ref>
+			</interceptor-ref> -->
 			<result name="success">/global/success.jsp</result>
 			<result name="input">/global/error.jsp</result>
 		</action>
