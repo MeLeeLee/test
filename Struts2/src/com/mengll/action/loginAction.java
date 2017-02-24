@@ -2,29 +2,18 @@ package com.mengll.action;
 
 import java.io.File;
 
+import com.mengll.bean.User;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 
 @SuppressWarnings("serial")
-public class loginAction extends ActionSupport {
-	private String id;
-
-	public String getId() {
-		return id;
+public class loginAction extends ActionSupport implements ModelDriven<User>{
+	private User user=new User();
+	@Override
+	public User getModel() {
+		// TODO Auto-generated method stub
+		return user;
 	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	private String name;
 
 	public String execute() throws Exception {
 		System.out.println("loginactiong----excute");
@@ -32,8 +21,8 @@ public class loginAction extends ActionSupport {
 	}
 
 	public String login() {
-		System.out.println("id = " + id);
-		System.out.println("name = " + name);
+		System.out.println("id = " + user.getId());
+		System.out.println("name = " + user.getName());
 		return "success";
 	}
 }

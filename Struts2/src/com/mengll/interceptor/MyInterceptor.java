@@ -11,7 +11,7 @@ public class MyInterceptor implements Interceptor{
 	@Override
 	public String intercept(ActionInvocation arg0) throws Exception {
 		System.out.println("intercept...............");
-		return null;
+		return "success";
 	}
 	@Override
 	public void destroy() {

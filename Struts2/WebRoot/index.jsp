@@ -11,9 +11,10 @@
 	<a href="${pageContext.request.contextPath}/test/loginAction.action">测试action</a>
 	<br>
 	<br>
-	<form action="${pageContext.request.contextPath}/test/loginAction" enctype="multipart/form-data">
+	<form action="${pageContext.request.contextPath}/test/loginAction" method="post">
 		<s:text name="resource.id" />:<input name="id" type="text"><br />
 		<s:text name="resource.name" />:<input name="name" type="text"><br />
+		<input type="submit" name="提交">
 	</form>
 	<form action="${pageContext.request.contextPath}/test/uploadAction"
 	name="form1"  method="post" enctype="multipart/form-data">
